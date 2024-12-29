@@ -7,6 +7,8 @@ import com.hwjl.iBarBook.models.user.User;
 import com.hwjl.iBarBook.services.IngredientService;
 import com.hwjl.iBarBook.services.UserService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class UserController {
 
     private final UserService userService;
     private final IngredientService ingredientService;
+
+
 
     @GetMapping("all")
     public List<User> users(){
@@ -48,9 +52,20 @@ public class UserController {
         return userService.findRolesByUserId(id);
     }
 
-    @PutMapping("/{id}/add_ingredients")
-    public List<Ingredient> addIngredientsToStore(@PathVariable Long id, @RequestBody List<Long> ingredients){
-        return ingredientService.findByUserId(id);
+    @PutMapping("/add-ingredients")
+    public List<Ingredient> addIngredientsToUser(
+            @RequestHeader("Authorization") String jwt,
+            @RequestBody AddIngredientsRequest request) {
+        Long userId = userService.getUserIdFromJwt(jwt);
+        return userService.addIngredientsToStore(userId, request.getIngredientIds());
     }
 
+}
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+class AddIngredientsRequest {
+    private List<Long> ingredientIds;
 }

@@ -107,6 +107,7 @@ public class WebSecurityConfig {
                         authorize -> authorize.requestMatchers("/admin/**").authenticated()
                                 .requestMatchers("/api/**").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/api/user/**").authenticated()
                                 .anyRequest().permitAll())
                 .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())

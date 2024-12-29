@@ -22,7 +22,7 @@ public class JwtProvider {
         String jwt = Jwts.builder()
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime()+86400000))
-                .claim("email", auth.getName())
+                .claim("username", auth.getName())
                 .claim( "authorities",roles)
                 .signWith(key)
                 .compact();
@@ -41,16 +41,16 @@ public class JwtProvider {
 
 
     @SuppressWarnings("deprecation")
-    public static String getEmailFromJwtToken(String jwt) {
+    public static String getUsernameFromJwtToken(String jwt) {
         jwt = jwt.substring(7); // Assuming "Bearer " is removed from the token
         try {
             //Claims claims=Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
             Claims claims = Jwts.parser().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-            String email = String.valueOf(claims.get("email"));
-            System.out.println("Email extracted from JWT: " + claims);
+            String email = String.valueOf(claims.get("username"));
+            System.out.println("Username extracted from JWT: " + claims);
             return email;
         } catch (Exception e) {
-            System.err.println("Error extracting email from JWT: " + e.getMessage());
+            System.err.println("Error extracting username from JWT: " + e.getMessage());
             e.printStackTrace();
             return null;
         }
