@@ -17,7 +17,7 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("api/user")
 public class UserController {
 
     private final UserService userService;
@@ -33,19 +33,9 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PostMapping("/registration")
-    public String addUser(@RequestBody User user){
-        return userService.registration(user);
-    }
-
     @PutMapping("/{id}/edit")
     public User editUser(@PathVariable Long id, @RequestBody User updatedUser){
         return userService.updateUser(id, updatedUser);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public String deleteUser(Long id){
-        return userService.deleteUser(id);
     }
 
     @GetMapping("/{id}/ingredients")

@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("/gadgets")
+@RequestMapping("/api/gadgets")
 @AllArgsConstructor
 public class GadgetsController {
     private final GadgetService gadgetService;

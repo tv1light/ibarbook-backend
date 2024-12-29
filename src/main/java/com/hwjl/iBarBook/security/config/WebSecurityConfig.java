@@ -104,8 +104,10 @@ public class WebSecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(
-                        authorize -> authorize.requestMatchers("/api/**")
-                                .authenticated().anyRequest().permitAll())
+                        authorize -> authorize.requestMatchers("/admin/**").authenticated()
+                                .requestMatchers("/api/**").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
+                                .anyRequest().permitAll())
                 .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));

@@ -1,27 +1,22 @@
 package com.hwjl.iBarBook.controllers;
 
 import com.hwjl.iBarBook.models.cocktails.Cocktail;
-
-
 import com.hwjl.iBarBook.models.ingredients.Ingredient;
 import com.hwjl.iBarBook.models.tags.Cocktail_tag;
 import com.hwjl.iBarBook.services.CocktailService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /*todo:
    1) Показать коктейли, которые можно приготовить с учетом выбранных ингредиентов
    2) Добавление картинки
-*  */
+*/
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("/cocktails")
+@RequestMapping("/api/cocktails")
 @AllArgsConstructor
 public class CocktailsController {
 

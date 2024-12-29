@@ -7,7 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ingredients")
+@RequestMapping("admin/ingredients")
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @AllArgsConstructor
 class AdminIngredientsController {

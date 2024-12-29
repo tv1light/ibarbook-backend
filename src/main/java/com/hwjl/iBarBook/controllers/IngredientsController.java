@@ -1,8 +1,6 @@
 package com.hwjl.iBarBook.controllers;
 
-
 import com.hwjl.iBarBook.models.ingredients.Ingredient;
-import com.hwjl.iBarBook.models.tags.Cocktail_tag;
 import com.hwjl.iBarBook.models.tags.Ingredient_tag;
 import com.hwjl.iBarBook.services.IngredientService;
 import lombok.AllArgsConstructor;
@@ -19,7 +17,7 @@ import java.util.Optional;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("/ingredients")
+@RequestMapping("/api/ingredients")
 @AllArgsConstructor
 public class IngredientsController {
     private final IngredientService ingredientService;

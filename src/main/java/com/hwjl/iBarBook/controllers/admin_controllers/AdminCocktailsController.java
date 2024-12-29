@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cocktails")
-
+@RequestMapping("admin/cocktails")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @AllArgsConstructor
 class AdminCocktailsController {
     private final CocktailService cocktailService;
