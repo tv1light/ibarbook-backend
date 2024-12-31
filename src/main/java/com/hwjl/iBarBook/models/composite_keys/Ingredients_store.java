@@ -19,4 +19,15 @@ public class Ingredients_store {
 
     @Id
     private Long ingredient_id;
+
+
+    // Кастомный геттер для Spring Data JPA
+    public Long getIngredientId() {
+        return ingredient_id;
+    }
+
+    // Кастомный сеттер для Spring Data JPA
+    public void setIngredientId(Long ingredientId) {
+        this.ingredient_id = ingredientId;
+    }
 }

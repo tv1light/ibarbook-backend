@@ -37,19 +37,22 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PutMapping("/{id}/edit")
-    public User editUser(@PathVariable Long id, @RequestBody User updatedUser){
-        return userService.updateUser(id, updatedUser);
+    @PutMapping("/edit")
+    public User editUser(@RequestHeader("Authorization") String jwt, @RequestBody User updatedUser){
+        Long userId = userService.getUserIdFromJwt(jwt);
+        return userService.updateUser(userId, updatedUser);
     }
 
-    @GetMapping("/{id}/ingredients")
-    public List<Ingredient> userIngredients(@PathVariable("id") Long id){
-        return ingredientService.findByUserId(id);
+    @GetMapping("/ingredients")
+    public List<Ingredient> userIngredients(@RequestHeader("Authorization") String jwt){
+        Long userId = userService.getUserIdFromJwt(jwt);
+        return ingredientService.findByUserId(userId);
     }
 
-    @GetMapping("/{id}/roles")
-    public List<Role> userRoles(@PathVariable Long id){
-        return userService.findRolesByUserId(id);
+    @GetMapping("/roles")
+    public List<Role> userRoles(@RequestHeader("Authorization") String jwt){
+        Long userId = userService.getUserIdFromJwt(jwt);
+        return userService.findRolesByUserId(userId);
     }
 
     @PutMapping("/add-ingredients")
@@ -59,6 +62,13 @@ public class UserController {
         Long userId = userService.getUserIdFromJwt(jwt);
         return userService.addIngredientsToStore(userId, request.getIngredientIds());
     }
+
+    @DeleteMapping("/ingredient/{ingredientId}")
+    public void deleteIngredient(@RequestHeader("Authorization") String jwt, @PathVariable Long ingredientId){
+        Long userId = userService.getUserIdFromJwt(jwt);
+        userService.deleteIngredientByUserId(ingredientId, userId);
+    }
+
 
 }
 

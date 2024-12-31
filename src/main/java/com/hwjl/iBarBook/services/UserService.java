@@ -92,4 +92,8 @@ public class UserService {
          User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
          return user.getId();
      }
+
+    public void deleteIngredientByUserId(Long userId, Long ingredientId) {
+         int i = ingredientsStoreRepository.deleteByIngredientIdAndUserId(ingredientId, userId);
+    }
 }
